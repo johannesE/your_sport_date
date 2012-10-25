@@ -2,6 +2,7 @@
  */
 package nasreldin_johannes;
 
+import APIs.UserList;
 import com.vaadin.Application;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
@@ -17,7 +18,7 @@ public class MyVaadinApplication extends Application {
     private Window window;
     private Label weatherLabel;
     private WeatherTable weatherTable= new WeatherTable();
-	
+    private UserList userList;
 	
 
     @Override
@@ -29,6 +30,7 @@ public class MyVaadinApplication extends Application {
 		window = new Window("Your SportDate Finder");
 		setMainWindow(window);
 		window.addComponent(createToolbar());
+                window.addComponent(getUserList());
 		
 	}
 
@@ -40,8 +42,9 @@ public class MyVaadinApplication extends Application {
         lo.addComponent(weatherTable.createWeatherTable());
         return lo;
 	}
-
-    
-
-    
+        private Component getUserList(){
+            userList = new UserList();
+            return userList.createUserList();
+        }
+        
 }
