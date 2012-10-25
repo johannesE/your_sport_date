@@ -173,6 +173,16 @@
       <scope>provided</scope>
 	</dependency>
     -->
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-core</artifactId>
+      <version>1.14</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>1.14</version>
+    </dependency>
   </dependencies>
 
 </project>

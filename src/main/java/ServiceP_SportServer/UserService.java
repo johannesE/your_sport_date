@@ -4,10 +4,17 @@
  */
 package ServiceP_SportServer;
 
+import JaxB_SportServer.User;
+
 /**
  *
  * @author Johannes Eifert
  */
 public class UserService {
+    public User getUserXML(){
+        JerseyClient client;
+        Webressource r = client
+        return null;
+    }
     
 }

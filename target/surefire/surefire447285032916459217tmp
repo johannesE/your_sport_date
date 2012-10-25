@@ -1,0 +1,23 @@
+#surefire
+#Thu Oct 25 14:06:44 CEST 2012
+testClassesDirectory=/home/telefonkabine/Dropbox/WorkspaceNetbook/workspace_netbeans/your_sport_date/target/test-classes
+forkMode=once
+classPathUrl.2=/home/telefonkabine/.m2/repository/com/vaadin/vaadin/6.8.2/vaadin-6.8.2.jar
+useManifestOnlyJar=true
+classPathUrl.1=/home/telefonkabine/Dropbox/WorkspaceNetbook/workspace_netbeans/your_sport_date/target/classes
+classPathUrl.0=/home/telefonkabine/Dropbox/WorkspaceNetbook/workspace_netbeans/your_sport_date/target/test-classes
+reportsDirectory=/home/telefonkabine/Dropbox/WorkspaceNetbook/workspace_netbeans/your_sport_date/target/surefire-reports
+providerConfiguration=org.apache.maven.surefire.junit.JUnit3Provider
+testSuiteDefinitionTestSourceDirectory=/home/telefonkabine/Dropbox/WorkspaceNetbook/workspace_netbeans/your_sport_date/src/test/java
+surefireClassPathUrl.1=/home/telefonkabine/.m2/repository/org/apache/maven/surefire/surefire-api/2.10/surefire-api-2.10.jar
+surefireClassPathUrl.0=/home/telefonkabine/.m2/repository/org/apache/maven/surefire/surefire-junit3/2.10/surefire-junit3-2.10.jar
+runOrder=filesystem
+useSystemClassLoader=true
+excludes0=**/*$*
+isTrimStackTrace=true
+enableAssertions=true
+includes2=**/*TestCase.java
+failIfNoTests=false
+includes1=**/*Test.java
+includes0=**/Test*.java
+childDelegation=false
