@@ -35,7 +35,8 @@ public class MyVaadinApplication extends Application {
 	private Component createToolbar() {
 		HorizontalLayout lo = new HorizontalLayout();
         lo.addComponent(weatherLabel = new Label("Weather: \n"
-        		+"Proposed Activity: ", Label.CONTENT_PREFORMATTED));
+        		+"Proposed Activity: \n"
+                        +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
         lo.addComponent(weatherTable.createWeatherTable());
         return lo;
 	}
