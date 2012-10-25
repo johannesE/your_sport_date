@@ -5,6 +5,8 @@
 package ServiceP_SportServer;
 
 import JaxB_SportServer.User;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 
 /**
  *
@@ -12,8 +14,9 @@ import JaxB_SportServer.User;
  */
 public class UserService {
     public User getUserXML(){
-        JerseyClient client;
-        Webressource r = client
+        Client client = Client.create();
+        String BASE_RES = "http://diufvm31.unifr.ch:8090/CyberCoachServer/";
+        WebResource r = client.resource(BASE_RES+"resources/users");
         return null;
     }
     
