@@ -17,7 +17,7 @@ import ui.WeatherTable;
 public class MyVaadinApplication extends Application {
     private Window window;
     private Label weatherLabel;
-    private WeatherTable weatherTable= new WeatherTable();
+    private WeatherTable weatherTable;
     private UserList userList;
 	
 
@@ -36,10 +36,11 @@ public class MyVaadinApplication extends Application {
 
 	private Component createToolbar() {
 		HorizontalLayout lo = new HorizontalLayout();
-        lo.addComponent(weatherLabel = new Label("Weather: \n"
+                weatherTable = new WeatherTable();
+                lo.addComponent(weatherLabel = new Label("Weather: \n"
         		+"Proposed Activity: \n"
                         +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
-        lo.addComponent(weatherTable.createWeatherTable());
+                lo.addComponent(weatherTable.createWeatherTable());
         return lo;
 	}
         private Component getUserList(){
