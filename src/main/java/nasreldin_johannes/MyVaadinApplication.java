@@ -2,7 +2,7 @@
  */
 package nasreldin_johannes;
 
-import APIs.UserList;
+import ui.UserList;
 import com.vaadin.Application;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
