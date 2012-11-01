@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="user")
 public class User {
     String username;
-
+    String uri;
     public String getUsername() {
         return username;
     }
@@ -29,6 +29,6 @@ public class User {
     public void setUri(String uri) {
         this.uri = uri;
     }
-    String uri;
+    
     
 }

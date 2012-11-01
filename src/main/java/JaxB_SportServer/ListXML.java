@@ -62,6 +62,7 @@ public class ListXML {
     public void setType(String type) {
         this.type = type;
     }
+    
     @XmlElementWrapper(name="links")
     @XmlElementRef
     public Collection<Link> getLinks() {

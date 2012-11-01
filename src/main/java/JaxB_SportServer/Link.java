@@ -4,10 +4,13 @@
  */
 package JaxB_SportServer;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Johannes Eifert
  */
+@XmlRootElement(name="link")
 public class Link {
     
     String description;

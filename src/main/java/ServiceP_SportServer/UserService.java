@@ -10,7 +10,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import java.lang.reflect.Array;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -22,11 +21,11 @@ public class UserService {
     ClientConfig config = new DefaultClientConfig();
     
     public User getUserXML(String username){
-        Client client = Client.create();
+        Client client = Client.create(config);
         WebResource r = client.resource(BASE_URI+"resources/users/?start=0&size=10");
         ListXML list = r.accept(MediaType.APPLICATION_XML).get(ListXML.class);
-        System.out.print(list.getUsers().size());
-        return null;       
+        System.out.print(list.getUri());
+        return null;
             
     
     }
