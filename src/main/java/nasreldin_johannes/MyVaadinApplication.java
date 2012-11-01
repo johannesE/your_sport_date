@@ -2,6 +2,7 @@
  */
 package nasreldin_johannes;
 
+import ServiceP_SportServer.UserService;
 import ui.UserList;
 import com.vaadin.Application;
 import com.vaadin.ui.Component;
@@ -24,6 +25,8 @@ public class MyVaadinApplication extends Application {
     @Override
     public void init() {
     	buildMainLayout();
+        UserService u = new UserService();
+        u.getUserXML("asd");
     }
 
 	private void buildMainLayout() {
