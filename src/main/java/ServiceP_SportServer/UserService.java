@@ -19,15 +19,16 @@ import javax.ws.rs.core.MediaType;
 public class UserService {
     String BASE_URI = "http://diufvm31.unifr.ch:8090/CyberCoachServer/";
     ClientConfig config = new DefaultClientConfig();
+    Client client = Client.create(config);
     
-    public User getUserXML(String username){
-        Client client = Client.create(config);
-        WebResource r = client.resource(BASE_URI+"resources/users/?start=0&size=10");
+    public ListXML getUserXML(String username){
+        System.out.println("Accessing user list..");
+        WebResource r = client.resource(BASE_URI+"resources/users/?start=0&size=100");
         ListXML list = r.accept(MediaType.APPLICATION_XML).get(ListXML.class);
-        System.out.print(list.getUri());
-        return null;
-            
-    
+        System.out.println("User list accessed.");
+        
+        return list;
+        
     }
     
 }
