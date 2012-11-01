@@ -15,13 +15,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="list")
 public class ListXML {
-    Collection <User> users;
+    public Collection <User> users;
     int available;
     int end;
     int start;
     String uri;
     String type;
-    Collection <Link> links;
+    public Collection <Link> links;
 
     public int getAvailable() {
         return available;
@@ -67,8 +67,7 @@ public class ListXML {
     public Collection<Link> getLinks() {
         return links;
     }
-    @XmlElementWrapper(name="links")
-    @XmlElementRef
+    
     public void setLinks(Collection<Link> links) {
         this.links = links;
     }
@@ -79,8 +78,7 @@ public class ListXML {
     public Collection<User> getUsers() {
         return users;
     }
-    @XmlElementWrapper(name="users")
-    @XmlElementRef
+    
     public void setUsers(Collection<User> users) {
         this.users = users;
     }
