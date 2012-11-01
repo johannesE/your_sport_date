@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="link")
 public class Link {
+    public Link(){
+        
+    }
     
     String description;
     String href;

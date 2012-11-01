@@ -15,13 +15,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="list")
 public class ListXML {
-    public Collection <User> users;
+    public ListXML(){
+    
+    }
+    
+    Collection <User> users;
     int available;
     int end;
     int start;
     String uri;
     String type;
-    public Collection <Link> links;
+    Collection <Link> links;
 
     public int getAvailable() {
         return available;

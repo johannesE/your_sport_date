@@ -14,6 +14,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
     String username;
     String uri;
+    
+    public User(){
+    }
+    
     public String getUsername() {
         return username;
     }
