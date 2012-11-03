@@ -20,13 +20,11 @@ public class MyVaadinApplication extends Application {
     private Label weatherLabel;
     private WeatherTable weatherTable;
     private UserList userList;
-	
+    private UserService u = new UserService();
 
     @Override
     public void init() {
     	buildMainLayout();
-        UserService u = new UserService();
-        u.getUserXML("asd");
     }
 
 	private void buildMainLayout() {
@@ -44,7 +42,7 @@ public class MyVaadinApplication extends Application {
         		+"Proposed Activity: \n"
                         +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
                 lo.addComponent(weatherTable.createWeatherTable());
-        return lo;
+                return lo;
 	}
         private Component getUserList(){
             userList = new UserList();

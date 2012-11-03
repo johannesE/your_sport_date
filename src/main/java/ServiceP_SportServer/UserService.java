@@ -21,14 +21,12 @@ public class UserService {
     ClientConfig config = new DefaultClientConfig();
     Client client = Client.create(config);
     
-    public ListXML getUserXML(String username){
+    public ListXML getUserXML(){
         System.out.println("Accessing user list..");
         WebResource r = client.resource(BASE_URI+"resources/users/?start=0&size=100");
         ListXML list = r.accept(MediaType.APPLICATION_XML).get(ListXML.class);
         System.out.println("User list accessed.");
-        
         return list;
-        
     }
     
 }
