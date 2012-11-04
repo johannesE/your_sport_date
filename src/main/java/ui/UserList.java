@@ -19,19 +19,17 @@ public class UserList {
      UserService service = new UserService();
     
      public Component createUserList(){
-         usertable = new Table();
+         usertable = new Table("User List");
          usertable.addContainerProperty("Name", String.class,  null);
          usertable.addContainerProperty("URI", String.class,  null);
          
          getAllUserInformation();
          User[] users = getAllUserInformation();
-         
          for (int i = 0; i < users.length; i++) {
-             String name = users[i].getUsername();
-             usertable.addItem(new Object[]{name, users[i].getUri()});
-             System.out.println(users[i].getUsername()+" & "+users[i].getUri());
+             usertable.addItem(new Object[]{users[i].getUsername(),
+                 users[i].getUri()}, new Integer(i+1));
          }
-        
+        usertable.addItem(new Object[]{"max", "moritz", 2});
         return usertable;
      }
      
