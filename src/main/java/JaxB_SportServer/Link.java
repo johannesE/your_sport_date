@@ -4,6 +4,7 @@
  */
 package JaxB_SportServer;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -19,7 +20,7 @@ public class Link {
     String description;
     String href;
     
-    
+    @XmlAttribute
     public String getDescription() {
         return description;
     }
@@ -27,7 +28,7 @@ public class Link {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    @XmlAttribute
     public String getHref() {
         return href;
     }

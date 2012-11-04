@@ -4,6 +4,7 @@
  */
 package JaxB_SportServer;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,7 +18,7 @@ public class User {
     
     public User(){
     }
-    
+    @XmlAttribute
     public String getUsername() {
         return username;
     }
@@ -25,7 +26,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    @XmlAttribute
     public String getUri() {
         return uri;
     }

@@ -5,7 +5,7 @@
 package JaxB_SportServer;
 
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="list")
 public class ListXML {
     public ListXML(){
-    
     }
     
     Collection <User> users;
@@ -26,7 +25,8 @@ public class ListXML {
     String uri;
     String type;
     Collection <Link> links;
-
+    
+    @XmlAttribute
     public int getAvailable() {
         return available;
     }
@@ -34,7 +34,7 @@ public class ListXML {
     public void setAvailable(int available) {
         this.available = available;
     }
-
+    @XmlAttribute
     public int getEnd() {
         return end;
     }
@@ -42,7 +42,7 @@ public class ListXML {
     public void setEnd(int end) {
         this.end = end;
     }
-
+    @XmlAttribute
     public int getStart() {
         return start;
     }
@@ -50,7 +50,7 @@ public class ListXML {
     public void setStart(int start) {
         this.start = start;
     }
-
+    @XmlAttribute
     public String getUri() {
         return uri;
     }
@@ -58,7 +58,7 @@ public class ListXML {
     public void setUri(String uri) {
         this.uri = uri;
     }
-
+    @XmlAttribute
     public String getType() {
         return type;
     }
