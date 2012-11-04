@@ -4,7 +4,10 @@
  */
 package JaxB_SportServer;
 
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,7 +19,17 @@ public class User {
     String username;
     String uri;
     boolean publicvisible;
+    Collection <Subscription> subscriptions;
     
+    @XmlElementWrapper(name="links")
+    @XmlElementRef
+    public Collection<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Collection<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
     
     public boolean isPublicvisible() {
         return publicvisible;
