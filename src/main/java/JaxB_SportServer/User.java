@@ -15,6 +15,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
     String username;
     String uri;
+    boolean publicvisible;
+    
+    
+    public boolean isPublicvisible() {
+        return publicvisible;
+    }
+
+    public void setPublicvisible(boolean publicvisible) {
+        this.publicvisible = publicvisible;
+    }
     
     public User(){
     }
