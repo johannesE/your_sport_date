@@ -29,14 +29,12 @@ public class UserList {
              usertable.addItem(new Object[]{users[i].getUsername(),
                  users[i].getUri()}, new Integer(i+1));
          }
-        usertable.addItem(new Object[]{"max", "moritz", 2});
         return usertable;
      }
      
      private User[] getAllUserInformation(){
          
          ListXML list = service.getUserXML();
-         System.out.print(list.getUsers().toArray()[1].toString()); 
          User[] arrayList = list.getUsers().toArray(new User[0]);
          
          return arrayList;
