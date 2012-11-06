@@ -6,11 +6,13 @@ package JaxB_SportServer;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Johannes Eifert
  */
+@XmlRootElement(name="partnership")
 public class Partnership {
     int id;
     String uri;
@@ -44,6 +46,7 @@ public class Partnership {
     public void setPublicvisible(boolean publicvisible) {
         this.publicvisible = publicvisible;
     }
+    //Eventuell falsch..
     @XmlElementRef
     public User getUser1() {
         return user1;
@@ -52,6 +55,7 @@ public class Partnership {
     public void setUser1(User user1) {
         this.user1 = user1;
     }
+    //Eventuell falsch..
     @XmlElementRef
     public User getUser2() {
         return user2;
