@@ -5,11 +5,13 @@
 package JaxB_SportServer;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Johannes Eifert
  */
+@XmlRootElement(name="sport")
 public class Sport {
     int id;
     String name;
