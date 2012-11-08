@@ -80,11 +80,11 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         else if (e.getButton() == debugButton){
             User user = new User();
             user.setEmail("asdf@gmail.com");
-            user.setPassword("asdf");
+            user.setPassword("asdffj");
             user.setPublicvisible(true);
             user.setRealname("huhu");
-            user.setUsername("00010");
-            user.setUri("00010");
+            //user.setUsername("00010");
+            user.setUri("CyberCoachServer/resources/users/00010");
             u.createUserXML(user);
         }
         
