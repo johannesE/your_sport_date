@@ -6,9 +6,10 @@ package ui;
 
 import JaxB_SportServer.User;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.Window;
-import java.util.Vector;
 
 /**
  * Creates a Window with a Form that allows user creation.
@@ -21,6 +22,8 @@ public class CreateUserWindow extends Window{
     String password;
     String realname;
     boolean visible;
+    public Form form;
+    public User userbean;
     
     /** Window is created by using the constructor */
     public CreateUserWindow(){
@@ -33,17 +36,14 @@ public class CreateUserWindow extends Window{
     
     /** creates the form */
     private Form createform(){
-        Form form = new Form();
+        form = new Form();
+        form.setFormFieldFactory(new UserCreationFormFactory());
         form.setCaption("User creation");
         form.setDescription("Enter your desired details below");
-        User userbean = new User();
+        userbean = new User();
         BeanItem useritems = new BeanItem(userbean);
         form.setItemDataSource(useritems);
-        Vector order = new Vector();
-        order.add("username");
-        order.add("uri");
-        order.add("publicvisible");
-        form.setVisibleItemProperties(order);
+        form.setFormFieldFactory(new UserCreationFormFactory());
         return form;
     }
     

@@ -6,6 +6,7 @@ package JaxB_SportServer;
 
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,6 +20,9 @@ public class User {
     String username;
     String uri;
     boolean publicvisible;
+    String email; //for user creation
+    String password;//for user creation
+    String realname;//for user creation
     Collection <Subscription> subscriptions;
     
     @XmlElementWrapper(name="links")
@@ -56,6 +60,30 @@ public class User {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+    @XmlElement
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    @XmlElement
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    @XmlElement
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
     }
     
     

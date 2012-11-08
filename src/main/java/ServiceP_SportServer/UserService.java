@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
  * @author Johannes Eifert
  */
 public class UserService {
-    String BASE_URI = "http://diufvm31.unifr.ch:8090/CyberCoachServer/";
+    public String BASE_URI = "http://diufvm31.unifr.ch:8090/CyberCoachServer/";
     ClientConfig config = new DefaultClientConfig();
     Client client = Client.create(config);
     
@@ -27,6 +27,15 @@ public class UserService {
         ListXML list = r.accept(MediaType.APPLICATION_XML).get(ListXML.class);
         System.out.println("User list accessed.");
         return list;
+    }
+    
+    public void createUserXML(User user){
+        System.out.print("Creating user: ");
+        System.out.println(user.getUsername());
+        WebResource r = client.resource(BASE_URI+user.getUri());
+        r.type(MediaType.TEXT_XML).accept(MediaType.APPLICATION_XML).put(user);
+        
+        System.out.println("User "+user.getUsername()+" created");
     }
     
 }
