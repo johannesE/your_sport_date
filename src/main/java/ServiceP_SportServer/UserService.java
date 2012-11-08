@@ -17,13 +17,13 @@ import javax.ws.rs.core.MediaType;
  * @author Johannes Eifert
  */
 public class UserService {
-    public String BASE_URI = "http://diufvm31.unifr.ch:8090/CyberCoachServer/";
+    public String BASE_URI = "http://diufvm31.unifr.ch:8090/";
     ClientConfig config = new DefaultClientConfig();
     Client client = Client.create(config);
     
     public ListXML getUserXML(){
         System.out.println("Accessing user list..");
-        WebResource r = client.resource(BASE_URI+"resources/users/?start=0&size=100");
+        WebResource r = client.resource(BASE_URI+"CyberCoachServer/resources/users/?start=0&size=100");
         ListXML list = r.accept(MediaType.APPLICATION_XML).get(ListXML.class);
         System.out.println("User list accessed.");
         return list;
@@ -31,10 +31,9 @@ public class UserService {
     
     public void createUserXML(User user){
         System.out.print("Creating user: ");
-        System.out.println(user.getUsername());
+        System.out.println(user.getUri());
         WebResource r = client.resource(BASE_URI+user.getUri());
-        r.type(MediaType.TEXT_XML).accept(MediaType.APPLICATION_XML).put(user);
-        
+        r.type(MediaType.TEXT_XML).accept(MediaType.APPLICATION_XML).put(User.class, user);
         System.out.println("User "+user.getUsername()+" created");
     }
     
