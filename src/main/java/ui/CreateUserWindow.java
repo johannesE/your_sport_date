@@ -41,6 +41,7 @@ public class CreateUserWindow extends Window{
         form.setCaption("User creation");
         form.setDescription("Enter your desired details below");
         userbean = new User();
+        userbean.setPublicvisible(1);
         BeanItem useritems = new BeanItem(userbean);
         form.setItemDataSource(useritems);
         form.setFormFieldFactory(new UserCreationFormFactory());

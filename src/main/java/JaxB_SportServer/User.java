@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User {
     String username;
     String uri;
-    boolean publicvisible;
+    int publicvisible;
     String email; //for user creation
     String password;//for user creation
     String realname;//for user creation
@@ -34,12 +34,12 @@ public class User {
     public void setSubscriptions(Collection<Subscription> subscriptions) {
         this.subscriptions = subscriptions;
     }
-    
-    public boolean isPublicvisible() {
+    @XmlElement
+    public int getPublicvisible() {
         return publicvisible;
     }
 
-    public void setPublicvisible(boolean publicvisible) {
+    public void setPublicvisible(int publicvisible) {
         this.publicvisible = publicvisible;
     }
     

@@ -23,15 +23,15 @@ public class UserCreationFormFactory implements FormFieldFactory {
         // Identify the fields by their Property ID.
         String pid = (String) propertyId;
         if ("realname".equals(pid)) {
-            return new TextField("Your real name");
+            return new TextField("Your real name", "name");
         } else if ("username".equals(pid)) {
-            return new TextField("Your desired user name");
+            return new TextField("Your desired user name", "username");
         } else if("password".equals(pid)){
-            return new TextField("Enter a new Password");
+            return new TextField("Enter a new Password", "password");
         } else if ("email".equals(pid)){
-            return new TextField("Your email address");
+            return new TextField("Your email address", "asdf@gmail.com");
         } else if ("publicvisible".equals(pid)){
-            return new CheckBox("Make the account visible for the public");
+            return new TextField("Make the account visible for the public (1)", "1");
         }
                         
         
