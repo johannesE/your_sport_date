@@ -29,8 +29,8 @@ public class CreateUserWindow extends Window{
     public CreateUserWindow(){
         setModal(true);
         center();
-        setWidth("50%");
-        setHeight("50%");
+        //setWidth("50%");
+        //setHeight("50%");
         this.addComponent(createform());
     }
     
