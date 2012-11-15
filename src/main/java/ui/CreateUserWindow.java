@@ -56,7 +56,6 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
     }
 
     public void buttonClick(ClickEvent e) {
-        // TODO: Implement buttonClick of class ui.CreateUserWindow
         if (e.getButton()==commit){
             form.commit();
             userbean.setUri(u.BASE_URI+userbean.getUsername());
