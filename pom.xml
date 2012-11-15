@@ -99,7 +99,24 @@
               <resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
             </baseResource>
           </webAppConfig>
+          <connectors> <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                           <port>9090</port> 
+                       </connector>
+          </connectors>
+	<systemProperties>
+            <systemProperty>
+              <name>logback.configurationFile</name>
+              <value>./src/etc/logback.xml</value>
+            </systemProperty>
+          </systemProperties>
         </configuration>
+	<dependencies>
+          <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.15</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
