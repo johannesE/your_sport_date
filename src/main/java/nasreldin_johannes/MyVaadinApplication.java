@@ -26,11 +26,12 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     private WeatherTable weatherTable;
     private UserList userList;
     private UserService u = new UserService();
-    private Button newUserButton;
+    private Button newUserButton = new Button("Create a new User", this);
     CreateUserWindow createwindow;
     Button commit;
     Button debugButton;
     Button userListButton;
+    private Component userlist;
 
     @Override
     public void init() {
@@ -51,8 +52,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 lo.addComponent(weatherLabel = new Label("Weather: \n"
         		+"Proposed Activity: \n"
                         +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
-                lo.addComponent(weatherTable.createWeatherTable());Component
-                newUserButton = new Button("Create a new User", this);
+                lo.addComponent(weatherTable.createWeatherTable());
                 debugButton = new Button("DEBUG", this);
                 lo.addComponent(debugButton);
                 lo.addComponent(newUserButton);
@@ -92,7 +92,10 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             u.createUserXML(user);
         }
         else if (e.getButton() == userListButton){
-            window.addComponent(getUserList());
+            if (userlist!=null){
+            userlist = getUserList();
+            window.addComponent(userlist);
+            }
         }
         
     }
