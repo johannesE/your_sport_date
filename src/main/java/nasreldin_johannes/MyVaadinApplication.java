@@ -36,7 +36,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 
     @Override
     public void init() {
-//        setTheme("runo");
+//        setTheme("mytheme");
     	buildMainLayout();
     }
 
