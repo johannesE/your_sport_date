@@ -24,7 +24,7 @@ public class UserService {
     
     public ListXML getUserXML(){
         System.out.println("Accessing user list..");
-        WebResource r = client.resource(BASE_URI+"CyberCoachServer/resources/users/?start=0&size=100");
+        WebResource r = client.resource(BASE_URI+"CyberCoachServer/resources/users/?start=0&size=1000");
         ListXML list = r.accept(MediaType.APPLICATION_XML).get(ListXML.class);
         System.out.println("User list accessed.");
         return list;

@@ -78,13 +78,15 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             window.removeWindow(createwindow);
         }
         else if (e.getButton() == debugButton){
+            for(int i=0;i<100;i++){
             User user = new User();
             user.setEmail("asdfg@gmail.com");
             user.setPassword("password");
             user.setPublicvisible(1);
             user.setRealname("huhuhu");
-            user.setUsername("0");
+            user.setUsername("0"+i+"0");
             u.createUserXML(user);
+            }
         }
         else if (e.getButton() == userListButton){
             if (userlist == null){

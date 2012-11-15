@@ -30,7 +30,7 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
     
     /** Window is created by using the constructor */
     public CreateUserWindow(UserService u){
-        this.u= u;
+        this.u = u;
         setModal(true);
         center();
         setWidth("50%");
