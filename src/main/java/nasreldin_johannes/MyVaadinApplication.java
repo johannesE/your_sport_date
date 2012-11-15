@@ -31,17 +31,19 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     Button commit;
     Button debugButton;
     Button userListButton;
-    private Component userlist;
+    private Component userlist = null;
+    private Button userManagementButton = new Button("User Management", this);
 
     @Override
     public void init() {
+//        setTheme("runo");
     	buildMainLayout();
     }
 
 	private void buildMainLayout() {
 		window = new Window("Your SportDate Finder");
 		setMainWindow(window);
-                window.addWindow(new Startpopup(window));
+                window.addWindow(new Startpopup(window,u));
 		window.addComponent(createToolbar());
                 
 	}
@@ -55,9 +57,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 lo.addComponent(weatherTable.createWeatherTable());
                 debugButton = new Button("DEBUG", this);
                 lo.addComponent(debugButton);
-                lo.addComponent(newUserButton);
                 userListButton = new Button("Get the User List", this);
                 lo.addComponent(userListButton);
+                lo.addComponent(userManagementButton);
                 return lo;
 	}
         private Component getUserList(){
@@ -68,13 +70,6 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 
     public void buttonClick(ClickEvent e) {
         if (e.getButton()== newUserButton) {
-            System.out.println("Create a new user: ");
-            createwindow = new CreateUserWindow();
-            commit = new Button("Commit", createwindow.form, "commit");
-            commit.addListener(this);
-            createwindow.addComponent(commit);
-            window.addWindow(createwindow);
-            
         }
         else if(e.getButton() == commit){
             createwindow.form.commit();
@@ -92,10 +87,17 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             u.createUserXML(user);
         }
         else if (e.getButton() == userListButton){
-            if (userlist!=null){
+            if (userlist == null){
             userlist = getUserList();
             window.addComponent(userlist);
             }
+            else {
+                userlist = getUserList();
+                userlist.requestRepaint();
+            }
+        }
+        else if (e.getButton()== userManagementButton){
+            window.addWindow(new Startpopup(window, u));
         }
         
     }
