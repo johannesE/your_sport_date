@@ -21,8 +21,8 @@ public class Startpopup extends Window implements Button.ClickListener{
     this.window = window;
     setModal(true);
     center();
-    loginUserButton = new Button("Login", this);
-    createUserButton = new Button("Create a new User", this);
+    this.addComponent(loginUserButton = new Button("Login", this));
+    this.addComponent(createUserButton = new Button("Create a new User", this));
     }
 
     public void buttonClick(ClickEvent e) {
