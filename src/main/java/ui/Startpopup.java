@@ -6,6 +6,7 @@ package ui;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Window;
 
 /**
@@ -21,8 +22,12 @@ public class Startpopup extends Window implements Button.ClickListener{
     this.window = window;
     setModal(true);
     center();
-    this.addComponent(loginUserButton = new Button("Login", this));
-    this.addComponent(createUserButton = new Button("Create a new User", this));
+    setWidth("40%");
+    setHeight("40%");
+    HorizontalLayout hl = new HorizontalLayout();
+    hl.addComponent(loginUserButton = new Button("Login", this));
+    hl.addComponent(createUserButton = new Button("Create a new User", this));
+    this.addComponent(hl);
     }
 
     public void buttonClick(ClickEvent e) {
@@ -30,7 +35,8 @@ public class Startpopup extends Window implements Button.ClickListener{
             
         }
         else if (e.getButton()==createUserButton){
-            window.addComponent(new CreateUserWindow());
+            window.removeWindow(this);
+            window.addWindow(new CreateUserWindow());
             
         }
     }
