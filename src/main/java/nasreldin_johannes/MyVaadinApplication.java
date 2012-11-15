@@ -13,6 +13,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
 import ui.CreateUserWindow;
+import ui.Startpopup;
 import ui.WeatherTable;
 
 /**
@@ -29,6 +30,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     CreateUserWindow createwindow;
     Button commit;
     Button debugButton;
+    Button userListButton;
 
     @Override
     public void init() {
@@ -38,8 +40,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 	private void buildMainLayout() {
 		window = new Window("Your SportDate Finder");
 		setMainWindow(window);
+                window.addWindow(new Startpopup(window));
 		window.addComponent(createToolbar());
-                window.addComponent(getUserList());
+                
 	}
 
 	private Component createToolbar() {
@@ -48,11 +51,13 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 lo.addComponent(weatherLabel = new Label("Weather: \n"
         		+"Proposed Activity: \n"
                         +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
-                lo.addComponent(weatherTable.createWeatherTable());
+                lo.addComponent(weatherTable.createWeatherTable());Component
                 newUserButton = new Button("Create a new User", this);
                 debugButton = new Button("DEBUG", this);
                 lo.addComponent(debugButton);
                 lo.addComponent(newUserButton);
+                userListButton = new Button("Get the User List", this);
+                lo.addComponent(userListButton);
                 return lo;
 	}
         private Component getUserList(){
@@ -85,6 +90,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             user.setRealname("huhuhu");
             user.setUsername("0");
             u.createUserXML(user);
+        }
+        else if (e.getButton() == userListButton){
+            window.addComponent(getUserList());
         }
         
     }

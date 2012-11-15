@@ -31,11 +31,11 @@ public class CreateUserWindow extends Window{
         center();
         setWidth("50%");
         setHeight("70%");
-        this.addComponent(createform());
+        this.addComponent(createForm());
     }
     
     /** creates the form */
-    private Form createform(){
+    private Form createForm(){
         form = new Form();
         form.setFormFieldFactory(new UserCreationFormFactory());
         form.setCaption("User creation");
