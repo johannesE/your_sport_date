@@ -3,6 +3,7 @@
 package nasreldin_johannes;
 
 import JaxB_SportServer.User;
+import JaxB_doodle.DoodlePoll;
 import ServiceP_SportServer.UserService;
 import ui.UserList;
 import com.vaadin.Application;
@@ -12,6 +13,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
+import database.UserTable;
 import ui.CreateUserWindow;
 import ui.Startpopup;
 import ui.WeatherTable;
@@ -78,15 +80,43 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             window.removeWindow(createwindow);
         }
         else if (e.getButton() == debugButton){
-            for(int i=0;i<100;i++){
-            User user = new User();
-            user.setEmail("asdfg@gmail.com");
-            user.setPassword("password");
-            user.setPublicvisible(1);
-            user.setRealname("huhuhu");
-            user.setUsername("0"+i+"0");
-            u.createUserXML(user);
-            }
+            DoodlePoll poll = new DoodlePoll();
+            // set title, description
+            poll.setTitle("What do you want for lunch?");
+            poll.setDesc("Just a test poll..");
+
+// set the poll type to text
+            poll.setType(DoodlePoll.TEXT_POLL);
+// only YES or NO are possible votes
+            poll.setMode(2);
+
+// add options to vote for
+            poll.addOption("pizza");
+            poll.addOption("pasta");
+            poll.addOption("burger");
+
+// save the poll to Doodle
+            poll.save();
+            System.out.println(poll.toString());
+            System.out.println(poll.getId());
+            System.out.println(poll.getXKey());
+            System.out.println(poll.isNew());
+            
+            
+//            int i = 0;
+//            UserTable user = new UserTable(i, "username"+i, "password"+i);
+//            i++;
+//            System.out.println(user.toString());
+            
+//            for(int i=0;i<100;i++){
+//            User user = new User();
+//            user.setEmail("asdfg@gmail.com");
+//            user.setPassword("password");
+//            user.setPublicvisible(1);
+//            user.setRealname("huhuhu");
+//            user.setUsername("0"+i+"0");
+//            u.createUserXML(user);
+//            }
         }
         else if (e.getButton() == userListButton){
             if (userlist == null){
