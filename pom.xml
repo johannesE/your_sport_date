@@ -99,10 +99,10 @@
               <resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
             </baseResource>
           </webAppConfig>
-          <connectors> <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+          <!--<connectors> <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                            <port>9090</port> 
                        </connector>
-          </connectors>
+          </connectors> -->
 	<systemProperties>
             <systemProperty>
               <name>logback.configurationFile</name>
@@ -197,12 +197,12 @@
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-core</artifactId>
-      <version>1.14</version>
+      <version>1.13</version>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-client</artifactId>
-      <version>1.14</version>
+      <version>1.13</version>
     </dependency>
     <dependency>
     <groupId>org.vaadin.addons</groupId>
@@ -212,7 +212,7 @@
 <dependency>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>eclipselink</artifactId>
-    <version>2.3.0</version>
+    <version>2.3.2</version>
 </dependency>
 <dependency>
     <groupId>org.eclipse.persistence</groupId>
@@ -224,6 +224,34 @@
     <artifactId>mysql-connector-java</artifactId>
     <version>5.1.15</version>
 </dependency>
+    <dependency>
+      <groupId>oauth.signpost</groupId>
+      <artifactId>signpost-core</artifactId>
+      <version>1.2</version>
+      <scope>compile</scope>
+    </dependency>
+        <dependency>
+      <groupId>oauth.signpost</groupId>
+      <artifactId>signpost-jetty6</artifactId>
+      <version>1.2</version>
+    </dependency>
+            <dependency>
+      <groupId>oauth.signpost</groupId>
+      <artifactId>signpost-commonshttp4</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>jsr250-api</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.transaction</groupId>
+      <artifactId>jta</artifactId>
+      <version>1.1</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
 </project>
