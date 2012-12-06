@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.xml.*;
@@ -180,7 +181,7 @@ public class DoodlePoll
      * Name of the initiator. Doodle API also allows to connect this with a user
      * id instead, but currently this is not supported.
      */
-    private String initiator = "DORM SL2DOODLE";
+    private String initiator = "Your Sport Date";
 
     /**
      * Mode, the user can vote for an option
@@ -644,8 +645,8 @@ public class DoodlePoll
 		http = (HttpURLConnection) (new URL(BASE_URL + pollsURL)).openConnection();
 
 		http.setDoOutput(true);
-
-		http.setRequestProperty("Content-Type", "text/xml");
+                
+		http.setRequestProperty("Content-Type", "application/xml");
 
 		http.setRequestMethod("POST");
 

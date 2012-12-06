@@ -33,6 +33,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     Button commit;
     Button debugButton;
     Button userListButton;
+    Button deleteUserButton;
     private Component userlist = null;
     private Button userManagementButton = new Button("User Management", this);
 
@@ -59,7 +60,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 lo.addComponent(weatherTable.createWeatherTable());
                 debugButton = new Button("DEBUG", this);
                 lo.addComponent(debugButton);
+                deleteUserButton = new Button("Delete my User", this);
                 userListButton = new Button("Get the User List", this);
+                lo.addComponent(deleteUserButton);
                 lo.addComponent(userListButton);
                 lo.addComponent(userManagementButton);
                 return lo;
@@ -80,33 +83,34 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             window.removeWindow(createwindow);
         }
         else if (e.getButton() == debugButton){
-            DoodlePoll poll = new DoodlePoll();
-            // set title, description
-            poll.setTitle("What do you want for lunch?");
-            poll.setDesc("Just a test poll..");
-
-// set the poll type to text
-            poll.setType(DoodlePoll.TEXT_POLL);
-// only YES or NO are possible votes
-            poll.setMode(2);
-
-// add options to vote for
-            poll.addOption("pizza");
-            poll.addOption("pasta");
-            poll.addOption("burger");
-
-// save the poll to Doodle
-            poll.save();
-            System.out.println(poll.toString());
-            System.out.println(poll.getId());
-            System.out.println(poll.getXKey());
-            System.out.println(poll.isNew());
+//            DoodlePoll poll = new DoodlePoll();
+//            
+//            // set title, description
+//            poll.setTitle("What do you want for lunch?");
+//            poll.setDesc("Just a test poll..");
+//
+//// set the poll type to text
+//            poll.setType(DoodlePoll.TEXT_POLL);
+//// only YES or NO are possible votes
+//            poll.setMode(2);
+//
+//// add options to vote for
+//            poll.addOption("pizza");
+//            poll.addOption("pasta");
+//            poll.addOption("burger");
+//
+//// save the poll to Doodle
+//            poll.save();
+//            System.out.println(poll.toString());
+//            System.out.println(poll.getId());
+//            System.out.println(poll.getXKey());
+//            System.out.println(poll.isNew());
             
             
-//            int i = 0;
-//            UserTable user = new UserTable(i, "username"+i, "password"+i);
-//            i++;
-//            System.out.println(user.toString());
+            int i = 0;
+            UserTable user = new UserTable(i, "username"+i, "password"+i);
+            i++;
+            System.out.println(user.toString());
             
 //            for(int i=0;i<100;i++){
 //            User user = new User();
@@ -132,6 +136,13 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             window.addWindow(new Startpopup(window, u));
         }
         
+        else if(e.getButton() == deleteUserButton){
+            User user = new User();
+            user.setPassword("password");
+            user.setUsername("000");
+            
+            u.deleteUser(user);
+        }
     }
         
 }

@@ -65,7 +65,7 @@ public class UserService {
                 .accept(MediaType.APPLICATION_XML)
                 .delete(ClientResponse.class);
         
-        client.removeAllFilters();
+//        client.removeAllFilters();
         
         if ("200".equals(resp.getClientResponseStatus().toString())){
           System.out.println("User "+ user +" successfully deleted");  
