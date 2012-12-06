@@ -11,7 +11,10 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import com.sun.jersey.core.util.Base64;
 import javax.ws.rs.core.MediaType;
+
 
 /**
  *
@@ -44,6 +47,34 @@ public class UserService {
             System.out.println("User "+user.getUsername()+" created :-)");
         }
         
+    }
+    
+    public void deleteUser(User user){
+        System.out.println("Deleting user " + user);
+        
+//        client.addFilter(new HTTPBasicAuthFilter(user.getUsername(), user.getPassword()));
+        
+        WebResource r = client.resource(BASE_URI+
+                "CyberCoachServer/resources/users/"+user.getUsername());
+        
+        System.out.println("Trying to delete user " + r.toString());        
+       
+        ClientResponse resp = r
+                .header("Authorization", "Basic " + new String(Base64.encode( user.getUsername() +":"+ user.getPassword() )))
+                .type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML)
+                .delete(ClientResponse.class);
+        
+        client.removeAllFilters();
+        
+        if ("200".equals(resp.getClientResponseStatus().toString())){
+          System.out.println("User "+ user +" successfully deleted");  
+        } else {
+            System.out.println("Error while deleting user "+ user);
+        }
+        
+        
+//       TODO:Logout of vaadin
     }
     
 }
