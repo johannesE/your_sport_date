@@ -6,6 +6,7 @@ package database;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 /**
@@ -38,6 +39,37 @@ public class DatabaseService {
        
        EM.flush();
        EM.getTransaction().commit();
+   }
+   
+   public UserTable getUser(UserTable _user){
+       UserTable result = null;
+       
+       if(_user.getIdUser()!=null){
+           try{
+                result = (UserTable) EM.createNamedQuery("UserTable.findByIdUser")
+                    .setParameter("idUser", _user.getIdUser())
+                    .getSingleResult();
+           } catch(NoResultException noResultException){
+               System.out.println("no results for the id catched");
+           }
+           
+       }
+       else if(_user.getSportUsername()!=null){
+           try{
+                result = (UserTable) EM.createNamedQuery("UserTable.findByNameUser")
+                    .setParameter("sportUsername", _user.getSportUsername())
+                    .getSingleResult();
+           } catch(NoResultException noResultException){
+               System.out.println("no results for the name catched");
+           }
+       }
+       else {
+           
+           System.out.println("User was not found. Give it an Id or a username");
+           return null;
+       }
+       
+      return result;
    }
    
 }

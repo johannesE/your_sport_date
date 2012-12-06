@@ -44,7 +44,7 @@ public class Startpopup extends Window implements Button.ClickListener{
         }
         else if (e.getButton()==createUserButton){
             window.removeWindow(this);
-            window.addWindow(new CreateUserWindow(u));
+            window.addWindow(new CreateUserWindow());
             
         }
     }

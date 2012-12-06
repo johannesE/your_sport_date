@@ -5,6 +5,9 @@
 package nasreldin_johannes;
 
 import JaxB_SportServer.User;
+import ServiceP_SportServer.UserService;
+import database.DatabaseService;
+import database.UserTable;
 
 /**
  *
@@ -12,7 +15,13 @@ import JaxB_SportServer.User;
  */
 public class CurrentUser{
     private static CurrentUser instance;
-    private CurrentUser(){}
+    public String password;
+    public String username;
+    private UserService u;
+    
+    private CurrentUser(){
+        u = UserService.getInstance();
+    }
     
     
     
@@ -34,6 +43,17 @@ public class CurrentUser{
         this.cybercoach = cybercoach;
     }
     
+    public void createUser(User _user){
+        _user.setUri(u.BASE_URI+_user.getUsername());
+        setCybercoach(_user);
+        u.createUserXML(getCybercoach());
+        
+        UserTable localuser = new UserTable(getCybercoach().getUsername(),
+                getCybercoach().getPassword());
+        
+        DatabaseService.getInstance().createUser(localuser);
+        
+    }
     
     
     

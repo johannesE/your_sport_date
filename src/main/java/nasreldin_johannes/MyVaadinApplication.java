@@ -30,7 +30,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     private Label weatherLabel;
     private WeatherTable weatherTable;
     private UserList userList;
-    private UserService u = new UserService();
+    private UserService u = UserService.getInstance();
     private Button newUserButton = new Button("Create a new User", this);
     CreateUserWindow createwindow;
     Button commit;
@@ -111,10 +111,11 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             
             
             int i = 0;
-            UserTable _user = new UserTable(i, "username"+i, "password"+i);
-            i++;
+            UserTable _user = new UserTable("username"+i, "wrongpassword"+i);
+            
             DatabaseService _DS = DatabaseService.getInstance();
-                    _DS.createUser(_user);
+                    _DS.getUser(_user);
+            System.out.println(_DS.getUser(_user).getPassword());
             
 //            for(int i=0;i<100;i++){
 //            User user = new User();

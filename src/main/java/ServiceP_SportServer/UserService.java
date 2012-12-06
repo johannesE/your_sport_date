@@ -21,6 +21,19 @@ import javax.ws.rs.core.MediaType;
  * @author Johannes Eifert
  */
 public class UserService {
+    private static UserService instance;
+    
+    private UserService(){
+        
+    }
+    public synchronized static UserService getInstance() {
+        if (instance == null) 
+        {
+            instance = new UserService();
+        }
+        return instance;
+    }
+    
     public String BASE_URI = "http://diufvm31.unifr.ch:8090/";
     ClientConfig config = new DefaultClientConfig();
     Client client = Client.create(config);

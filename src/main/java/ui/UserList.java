@@ -16,7 +16,7 @@ import com.vaadin.ui.Table;
  */
 public class UserList {
      private Table usertable;
-     UserService service = new UserService();
+     UserService service = UserService.getInstance();
     
      public Component createUserList(){
          usertable = new Table("User List");

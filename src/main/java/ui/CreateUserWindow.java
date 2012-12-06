@@ -11,6 +11,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.Window;
+import nasreldin_johannes.CurrentUser;
 
 /**
  * Creates a Window with a Form that allows user creation.
@@ -24,13 +25,13 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
     String realname;
     boolean visible;
     public Form form;
-    public User userbean;
+    public User userbean = CurrentUser.getInstance().getCybercoach();
     private Button commit;
-    UserService u;
+
     
     /** Window is created by using the constructor */
-    public CreateUserWindow(UserService u){
-        this.u = u;
+    public CreateUserWindow(){
+        
         setModal(true);
         center();
         setWidth("50%");
@@ -47,7 +48,7 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
         form.setFormFieldFactory(new UserCreationFormFactory());
         form.setCaption("User creation");
         form.setDescription("Enter your desired details below");
-        userbean = new User();
+        userbean = CurrentUser.getInstance().getCybercoach();
         userbean.setPublicvisible(1);
         BeanItem useritems = new BeanItem(userbean);
         form.setItemDataSource(useritems);
@@ -58,8 +59,7 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
     public void buttonClick(ClickEvent e) {
         if (e.getButton()==commit){
             form.commit();
-            userbean.setUri(u.BASE_URI+userbean.getUsername());
-            u.createUserXML(userbean);
+            CurrentUser.getInstance().createUser(userbean);
             this.getParent().removeWindow(this);
         }
     }
