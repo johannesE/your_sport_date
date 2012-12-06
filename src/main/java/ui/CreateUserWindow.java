@@ -25,7 +25,7 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
     String realname;
     boolean visible;
     public Form form;
-    public User userbean = CurrentUser.getInstance().getCybercoach();
+    public User userbean;
     private Button commit;
 
     
@@ -36,24 +36,26 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
         center();
         setWidth("50%");
         setHeight("70%");
-        this.addComponent(form = createForm());
+        form = createForm();
+        this.addComponent(form);
         commit = new Button("Commit", form, "commit");
         commit.addListener(this);
         this.addComponent(commit);
+        userbean = CurrentUser.getInstance().getCybercoach();
     }
     
     /** creates the form */
     private Form createForm(){
-        form = new Form();
-        form.setFormFieldFactory(new UserCreationFormFactory());
-        form.setCaption("User creation");
-        form.setDescription("Enter your desired details below");
+        Form _form = new Form();
+        _form.setFormFieldFactory(new UserCreationFormFactory());
+        _form.setCaption("User creation");
+        _form.setDescription("Enter your desired details below");
         userbean = CurrentUser.getInstance().getCybercoach();
         userbean.setPublicvisible(1);
         BeanItem useritems = new BeanItem(userbean);
-        form.setItemDataSource(useritems);
-        form.setFormFieldFactory(new UserCreationFormFactory());
-        return form;
+        _form.setItemDataSource(useritems);
+        _form.setFormFieldFactory(new UserCreationFormFactory());
+        return _form;
     }
 
     public void buttonClick(ClickEvent e) {

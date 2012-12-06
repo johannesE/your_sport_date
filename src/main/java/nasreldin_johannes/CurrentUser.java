@@ -21,6 +21,10 @@ public class CurrentUser{
     
     private CurrentUser(){
         u = UserService.getInstance();
+        
+        if (getCybercoach()==null){
+            setCybercoach(new User());
+        }
     }
     
     
