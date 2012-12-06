@@ -14,6 +14,8 @@ public class CurrentUser{
     private static CurrentUser instance;
     private CurrentUser(){}
     
+    
+    
     public synchronized static CurrentUser getInstance() {
         if (instance == null) 
         {
