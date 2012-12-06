@@ -141,11 +141,11 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         }
         
         else if(e.getButton() == deleteUserButton){
-            User user = new User();
-            user.setPassword("password");
-            user.setUsername("000");
             
-            u.deleteUser(user);
+            
+            
+            
+            
         }
     }
         
