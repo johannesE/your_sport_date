@@ -3,7 +3,6 @@
 package nasreldin_johannes;
 
 import JaxB_SportServer.User;
-import JaxB_doodle.DoodlePoll;
 import ServiceP_SportServer.UserService;
 import ui.UserList;
 import com.vaadin.Application;
@@ -13,7 +12,11 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Window;
+import database.DatabaseService;
 import database.UserTable;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import ui.CreateUserWindow;
 import ui.Startpopup;
 import ui.WeatherTable;
@@ -108,9 +111,11 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             
             
             int i = 0;
-            UserTable user = new UserTable(i, "username"+i, "password"+i);
+            UserTable _user = new UserTable(i, "username"+i, "password"+i);
             i++;
-            System.out.println(user.toString());
+             EntityManagerFactory EMF = Persistence.createEntityManagerFactory("nasreldin_johannes_calory_book_war_1.0PU");
+             EntityManager EM = EMF.createEntityManager();
+            DatabaseService.createUser(_user, EM);
             
 //            for(int i=0;i<100;i++){
 //            User user = new User();

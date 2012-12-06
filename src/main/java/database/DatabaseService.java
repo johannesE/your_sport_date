@@ -13,17 +13,20 @@ import javax.persistence.Persistence;
  * @author Johannes Eifert
  */
 public class DatabaseService {
+    
+    
    protected static final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("nasreldin_johannes_calory_book_war_1.0PU");
    protected EntityManager EM = EMF.createEntityManager();
    
-   public void createUser(UserTable _user){
+   
+   public static void createUser(UserTable _user, EntityManager _EM){
        
-       EM.getTransaction().begin();
+       _EM.getTransaction().begin();
        
-       EM.persist(_user);
+       _EM.persist(_user);
        
-       EM.flush();
-       EM.close();
+       _EM.flush();
+       _EM.getTransaction().commit();
    }
    
 }
