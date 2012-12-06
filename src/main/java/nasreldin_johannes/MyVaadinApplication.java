@@ -113,9 +113,8 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             int i = 0;
             UserTable _user = new UserTable(i, "username"+i, "password"+i);
             i++;
-             EntityManagerFactory EMF = Persistence.createEntityManagerFactory("nasreldin_johannes_calory_book_war_1.0PU");
-             EntityManager EM = EMF.createEntityManager();
-            DatabaseService.createUser(_user, EM);
+            DatabaseService _DS = DatabaseService.getInstance();
+                    _DS.createUser(_user);
             
 //            for(int i=0;i<100;i++){
 //            User user = new User();
