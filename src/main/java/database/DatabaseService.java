@@ -14,19 +14,30 @@ import javax.persistence.Persistence;
  */
 public class DatabaseService {
     
-    
+   private static DatabaseService instance;
+   
    protected static final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("nasreldin_johannes_calory_book_war_1.0PU");
    protected EntityManager EM = EMF.createEntityManager();
    
+   private DatabaseService(){}
    
-   public static void createUser(UserTable _user, EntityManager _EM){
+   public synchronized static DatabaseService getInstance() 
+    {
+        if (instance == null) 
+        {
+            instance = new DatabaseService();
+        }
+        return instance;
+    }
+   
+   public void createUser(UserTable _user){
        
-       _EM.getTransaction().begin();
+       EM.getTransaction().begin();
        
-       _EM.persist(_user);
+       EM.persist(_user);
        
-       _EM.flush();
-       _EM.getTransaction().commit();
+       EM.flush();
+       EM.getTransaction().commit();
    }
    
 }
