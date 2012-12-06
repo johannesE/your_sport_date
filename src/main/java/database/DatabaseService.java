@@ -41,6 +41,44 @@ public class DatabaseService {
        EM.getTransaction().commit();
    }
    
+   
+   //returns false if there exists no such entry, else true
+   public boolean isUser(UserTable _user){
+       UserTable result = null;
+       
+       if(_user.getIdUser()!=null){
+           try{
+                result = (UserTable) EM.createNamedQuery("UserTable.findByIdUser")
+                    .setParameter("idUser", _user.getIdUser())
+                    .getSingleResult();
+           } catch(NoResultException noResultException){
+               System.out.println("no results for the id catched");
+               return false;
+           }
+           
+       } else if(_user.getSportUsername()!=null){
+           try{
+                result = (UserTable) EM.createNamedQuery("UserTable.findByNameUser")
+                    .setParameter("sportUsername", _user.getSportUsername())
+                    .getSingleResult();
+           } catch(NoResultException noResultException){
+               System.out.println("no results for the name catched");
+               return false;
+           }
+       }
+       else {
+           
+           System.out.println("User was not found. Give it an Id or a username");
+           return false;
+       }
+       if (result!= null){
+           return true;
+       } else {
+           return false;
+       }
+       
+   }
+   
    public UserTable getUser(UserTable _user){
        UserTable result = null;
        

@@ -46,6 +46,19 @@ public class UserService {
         return list;
     }
     
+    public boolean isUser(User _user){
+        User[] list = getUserXML().getUsers().toArray(new User[0]);
+        
+        for(int i = 0; i<list.length; i++){
+            if(list[i].getUsername() == _user.getUsername()){
+                return true;
+            } else {
+               return false;
+            }
+        }
+        return false;
+    }
+    
     public void createUserXML(User user){
         System.out.print("Creating user: ");
         System.out.println(user.getUri());

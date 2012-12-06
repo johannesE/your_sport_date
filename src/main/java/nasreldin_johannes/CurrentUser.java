@@ -6,6 +6,7 @@ package nasreldin_johannes;
 
 import JaxB_SportServer.User;
 import ServiceP_SportServer.UserService;
+import com.vaadin.Application.CustomizedSystemMessages;
 import database.DatabaseService;
 import database.UserTable;
 
@@ -48,15 +49,23 @@ public class CurrentUser{
     }
     
     public void createUser(User _user){
-        _user.setUri(u.BASE_URI+_user.getUsername());
-        setCybercoach(_user);
-        u.createUserXML(getCybercoach());
         
         UserTable localuser = new UserTable(getCybercoach().getUsername(),
                 getCybercoach().getPassword());
         
-        DatabaseService.getInstance().createUser(localuser);
+        if( ! DatabaseService.getInstance().isUser(localuser) && ! u.isUser(_user)){
+            
+            _user.setUri(u.BASE_URI+_user.getUsername());
+            setCybercoach(_user);
+            u.createUserXML(getCybercoach());
         
+            DatabaseService.getInstance().createUser(localuser); //create local user
+            
+        } else { 
+            System.out.println("Username already taken, please try again");
+            MyVaadinApplication main = new MyVaadinApplication();
+            main.init();
+        }
     }
     
     
