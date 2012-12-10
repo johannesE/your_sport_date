@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import ui.CreateUserWindow;
+import ui.LoginWindow;
 import ui.Startpopup;
 import ui.WeatherTable;
 
@@ -26,6 +27,10 @@ import ui.WeatherTable;
  */
 @SuppressWarnings("serial")
 public class MyVaadinApplication extends Application implements Button.ClickListener{
+
+    public static Object getInstance() {
+        throw new UnsupportedOperationException("Not yet implemented");//auto generated from teh login
+    }
     private Window window;
     private Label weatherLabel;
     private WeatherTable weatherTable;
@@ -44,13 +49,35 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     public void init() {
 //        setTheme("mytheme");
     	buildMainLayout();
+        
+    }
+public void authenticate( String login, String password) throws Exception
+    {
+        if (  "username".equals(login) && "querty".equals( password ) ) 
+        {
+            loadProtectedResources();
+            return;
+        }
+       
+       throw new Exception("Login failed!");
+
     }
 
-	private void buildMainLayout() {
+    private void loadProtectedResources ()
+    {
+        setMainWindow(window);
+    }
+	
+    
+    private void buildMainLayout() {
 		window = new Window("Your SportDate Finder");
-		setMainWindow(window);
+		setMainWindow (new LoginWindow());//the authenticaion method
+                window.addComponent(createToolbar());
+    
+                
+                //setMainWindow(window);
                 window.addWindow(new Startpopup(window,u));
-		window.addComponent(createToolbar());
+		//window.addComponent(createToolbar());
                 
 	}
 
