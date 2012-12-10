@@ -48,7 +48,7 @@ import nasreldin_johannes.MyVaadinApplication;
                 {
                     MyVaadinApplication.getInstance().authenticate((String)login.getValue (), 
                             (String)password.getValue ());
-                    open ( new ExternalResource (MyVaadinApplication.getInstance().getURL()));//the loging 
+                    open ( new ExternalResource (MyVaadinApplication.getInstance().getURL ()));//the loging 
                 }
                 catch ( Exception e )
                 {
