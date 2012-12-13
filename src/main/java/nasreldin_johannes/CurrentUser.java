@@ -6,7 +6,6 @@ package nasreldin_johannes;
 
 import JaxB_SportServer.User;
 import ServiceP_SportServer.UserService;
-import com.vaadin.Application.CustomizedSystemMessages;
 import database.DatabaseService;
 import database.UserTable;
 
@@ -80,8 +79,7 @@ public class CurrentUser{
             
         } else { 
             System.out.println("Username already taken, please try again");
-            MyVaadinApplication main = new MyVaadinApplication();
-            main.init();
+            MyVaadinApplication.getInstance().init();
         }
     }
 

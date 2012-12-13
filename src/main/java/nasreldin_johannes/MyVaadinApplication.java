@@ -2,7 +2,6 @@
  */
 package nasreldin_johannes;
 
-import JaxB_SportServer.User;
 import ServiceP_SportServer.UserService;
 import ui.UserList;
 import com.vaadin.Application;
@@ -10,14 +9,13 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.VerticalSplitPanel;
 import com.vaadin.ui.Window;
 import database.DatabaseService;
 import database.UserTable;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import ui.CreateUserWindow;
 import ui.LoginWindow;
 import ui.Startpopup;
@@ -29,12 +27,8 @@ import ui.WeatherTable;
 @SuppressWarnings("serial")
 public class MyVaadinApplication extends Application implements Button.ClickListener{
 
-    public MyVaadinApplication() {
+    public MyVaadinApplication(){ // I know that this should be private. Here this was not possible otherwise.
     }
-
-   // public static Object getInstance() {
-   //     throw new UnsupportedOperationException("Not yet implemented");//Diff_1 auto generated from the login
-   // }
     public static MyVaadinApplication instance = null;
     private Window window;
     private Label weatherLabel;
@@ -43,7 +37,6 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     private UserService u = UserService.getInstance();
     private Button newUserButton = new Button("Create a new User", this);
     CreateUserWindow createwindow;
-    Button commit;
     Button debugButton;
     Button userListButton;
     Button deleteUserButton;
@@ -52,6 +45,12 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     Button plannedActivity; // the planning must be related to this one
     private Component userlist = null;
     private Button userManagementButton = new Button("User Management", this);
+    private VerticalSplitPanel verticalSplit = new VerticalSplitPanel();
+    public boolean loggedin = false;
+
+    public void setLoggedin(boolean loggedin) {
+        this.loggedin = loggedin;
+    }
 
     public synchronized static MyVaadinApplication getInstance(){
         if (instance == null) 
@@ -64,49 +63,48 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     @Override
     public void init() {
 //        setTheme("mytheme");
+        instance = this;
         
-    	window = new Window("Pleas Login in order to access the application");
+        buildMainLayout();
+        
+        }
+         
+    public void setMainComponent (Component c){
+        verticalSplit.setFirstComponent(createToolbar());
+        verticalSplit.setSecondComponent(c);
+    }
+    
+    public void buildMainLayout() {
+        if (window == null){
+        window = new Window("Your Sport Date Finder");
         setMainWindow(window);
-        window.addComponent(userManagementButton);
         window.addWindow(new Startpopup(window,u));
+        }
         
-         }
-    
-       public void buildMainLayout(Window window) {
-           System.out.println("buildMainLayout() called");
-                this.removeWindow(this.window);
-                addWindow(window);
-                this.window= window;
-                setMainWindow(window);
-              
-                //setMainWindow (new LoginWindow());//the authenticaion method
-              
-                
-                window.addComponent(newbuttonsForUserServices()); //reorganising buttons horizontally 1st
-                window.addComponent(createToolbar());
-                window.addComponent(newbuttonsForActivities()); //to link new activity to this buttons
-           
-    
-                
-                //setMainWindow(window);
-                //window.addWindow(new Startpopup(window,u));
-		//window.addComponent(createToolbar());
-                
-	}
+        VerticalLayout layout = new VerticalLayout();
+        layout.setSizeFull();
+        verticalSplit.setSplitPosition(50, HorizontalSplitPanel.UNITS_PIXELS);
+        layout.addComponent(verticalSplit);
+        
+        verticalSplit.setFirstComponent(createToolbar());
+        
+        setMainComponent(userManagementButton);
+        
+        getMainWindow().setContent(layout);
+        
+    }
+       
 
 	private Component createToolbar() {
 		HorizontalLayout lo = new HorizontalLayout();
+                lo.addComponent(userManagementButton);
+                if(loggedin){
+                    lo.addComponent(newbuttonsForUserServices());
+                }
+//              
                 
-                weatherTable = new WeatherTable();
-                 window.addComponent(new Label("Weather Table"));
-               /*
-                * 
-                
-                lo.addComponent(weatherLabel = new Label("Weather: \n"
-        		+"Proposed Activity: \n"
-                        +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
-                */
-                lo.addComponent(weatherTable.createWeatherTable());
+//                weatherTable = new WeatherTable();
+//                lo.addComponent(weatherTable.createWeatherTable());
                 return lo;
         }
         
@@ -119,7 +117,6 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 debugButton = new Button("DEBUG", this);
                 deleteUserButton = new Button("Delete my User", this);
                 userListButton = new Button("Get the User List", this);
-                lr.addComponent(userManagementButton);
                 lr.addComponent(userListButton); //to arrange the buttons in the interface
                 lr.addComponent(deleteUserButton);
                 lr.addComponent(debugButton);
@@ -149,13 +146,6 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 
     public void buttonClick(ClickEvent e) {
         if (e.getButton()== newUserButton) {
-        }
-        else if(e.getButton() == commit){
-            createwindow.form.commit();
-            createwindow.userbean.setUri(u.BASE_URI+createwindow.userbean.getUsername());
-            u.createUserXML(createwindow.userbean);
-            window.removeWindow(createwindow);
-                       
         }
         else if (e.getButton() == debugButton){
 //            DoodlePoll poll = new DoodlePoll();
@@ -201,7 +191,6 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         }
         else if (e.getButton() == userListButton){
             if (userlist == null){
-            window.addWindow(new LoginWindow());//to enable the authenticaion method before connect to server
            
             userlist = getUserList();
             window.addComponent(userlist);

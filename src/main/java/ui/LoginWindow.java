@@ -8,6 +8,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Form;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 import nasreldin_johannes.CurrentUser;
@@ -29,6 +30,7 @@ public class LoginWindow extends Window implements Button.ClickListener{
         setName ("login");
         center();
         setModal(true);
+        setWidth("50%");
         form = createForm();
         addComponent(form);
         commit = new Button("Commit", form, "commit");
@@ -43,8 +45,7 @@ public class LoginWindow extends Window implements Button.ClickListener{
 
 
     private void setMainWindow() {
-        MyVaadinApplication main = new MyVaadinApplication();
-        main.setMainWindow(new Window("Your Sport Date Finder"));
+        MyVaadinApplication.getInstance().buildMainLayout();
 
     }
 	
@@ -70,8 +71,8 @@ public class LoginWindow extends Window implements Button.ClickListener{
                     form.getField("password").toString())){
                 
                 this.getParent().removeWindow(this);
-                setMainWindow();
-                
+                MyVaadinApplication.getInstance().setLoggedin(true);
+                MyVaadinApplication.getInstance().setMainComponent(new Label("You logged in Successfully"));
             }
         }
         
