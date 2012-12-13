@@ -9,8 +9,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
-
-
 /**
  *
  * @author Nasreldin
@@ -18,13 +16,13 @@ import com.vaadin.ui.Window;
 public class LoginWindow extends Window{
     private Window window;
     private Button btnLogin = new Button("Login");
-    private TextField login = new TextField ( "Username");
-    private TextField password = new TextField ( "Password");
+    private TextField login = new TextField ("Username");
+    private TextField password = new TextField ("Password");
     
     
       public void authenticate( String login, String password) throws Exception
     {
-        if (  "username".equals(login) && "querty".equals( password ) ) 
+        if ( "username".equals(login) && "querty".equals( password ) ) 
         {
             loadProtectedResources();
             return;
@@ -37,15 +35,15 @@ public class LoginWindow extends Window{
     private void loadProtectedResources ()
     {
         window = new Window("Your SportDate Finder");
-        //setMainWindow(window);//must be add window
+        setMainWindow(window);//must be add window
         
          
     }
 
-        /*private void setMainWindow(Window window) {
+        private void setMainWindow(Window window) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
-	*/
+	
     
 
     public LoginWindow ()
@@ -55,11 +53,11 @@ public class LoginWindow extends Window{
         initUI();
     }
 
-    private void initUI ()
+    private void initUI()
     {
-        password.setSecret ( true );
+        password.setSecret (true );
 
-        addComponent ( new Label ("Please login in order to use the application") );
+        addComponent ( new Label ("Please login in order to use the application"));
         addComponent ( new Label () );
         addComponent ( login );
         addComponent ( password );

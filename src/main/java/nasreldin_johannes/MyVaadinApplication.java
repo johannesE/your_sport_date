@@ -91,29 +91,26 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         }
         
               
-    private Component newbuttonsForUserServices(){    
+        private Component newbuttonsForUserServices(){    
         
                   //VerticalLayout lr = new VerticalLayout();
-                   HorizontalLayout lr = new HorizontalLayout();
+                HorizontalLayout lr = new HorizontalLayout();
                   
-                 debugButton = new Button("DEBUG", this);
+                debugButton = new Button("DEBUG", this);
                 deleteUserButton = new Button("Delete my User", this);
                 userListButton = new Button("Get the User List", this);
-               lr.addComponent(userListButton); //to arrange the buttons in the interface
                 lr.addComponent(userManagementButton);
+                lr.addComponent(userListButton); //to arrange the buttons in the interface
                 lr.addComponent(deleteUserButton);
                 lr.addComponent(debugButton);
-                
-                  return lr;
+                return lr;
               }
                
-    
-            
         private Component newbuttonsForActivities(){     
-            HorizontalLayout ln = new HorizontalLayout();
+                 HorizontalLayout ln = new HorizontalLayout();
            
-            weatherButton = new Button ("Weather Situation");//to appear in the top
-           ln.addComponent(weatherButton); //to integrate buttons to UI
+                 weatherButton = new Button ("Weather Situation");//to appear in the top
+                 ln.addComponent(weatherButton); //to integrate buttons to UI
                 
                 proposedActivity = new Button ("Proposed Activity");
                 plannedActivity = new Button ("Planned Activity"); 
@@ -184,6 +181,8 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         }
         else if (e.getButton() == userListButton){
             if (userlist == null){
+            window.addWindow(new LoginWindow());//to enable the authenticaion method before connect to server
+           
             userlist = getUserList();
             window.addComponent(userlist);
             }
