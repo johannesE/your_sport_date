@@ -29,9 +29,13 @@ import ui.WeatherTable;
 @SuppressWarnings("serial")
 public class MyVaadinApplication extends Application implements Button.ClickListener{
 
+    public MyVaadinApplication() {
+    }
+
    // public static Object getInstance() {
    //     throw new UnsupportedOperationException("Not yet implemented");//Diff_1 auto generated from the login
    // }
+    public static MyVaadinApplication instance = null;
     private Window window;
     private Label weatherLabel;
     private WeatherTable weatherTable;
@@ -49,6 +53,14 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     private Component userlist = null;
     private Button userManagementButton = new Button("User Management", this);
 
+    public synchronized static MyVaadinApplication getInstance(){
+        if (instance == null) 
+        {
+            instance = new MyVaadinApplication();
+        }
+        return instance;
+    }
+    
     @Override
     public void init() {
 //        setTheme("mytheme");
@@ -61,6 +73,10 @@ public class MyVaadinApplication extends Application implements Button.ClickList
          }
     
        public void buildMainLayout(Window window) {
+           System.out.println("buildMainLayout() called");
+                this.removeWindow(this.window);
+                addWindow(window);
+                this.window= window;
                 setMainWindow(window);
               
                 //setMainWindow (new LoginWindow());//the authenticaion method
