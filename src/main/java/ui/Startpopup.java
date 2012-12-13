@@ -40,6 +40,7 @@ public class Startpopup extends Window implements Button.ClickListener{
 
     public void buttonClick(ClickEvent e) {
         if (e.getButton()==loginUserButton){
+           window.removeWindow(this);
            window.addWindow(new LoginWindow());//to enable the authenticaion method
             
         }

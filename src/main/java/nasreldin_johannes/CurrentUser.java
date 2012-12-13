@@ -16,8 +16,24 @@ import database.UserTable;
  */
 public class CurrentUser{
     private static CurrentUser instance;
-    public String password;
-    public String username;
+    public String password = "";
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String username = "";
     private UserService u;
     
     private CurrentUser(){
@@ -26,6 +42,7 @@ public class CurrentUser{
         if (getCybercoach()==null){
             setCybercoach(new User());
         }
+        
     }
     
     
@@ -67,7 +84,18 @@ public class CurrentUser{
             main.init();
         }
     }
-    
-    
+
+    public boolean loginUser(String _username, String _password) {
+        setPassword(_password);
+        setUsername(_username);
+        
+        UserTable localuser = new UserTable(getUsername(),
+                getPassword());
+        if( ! DatabaseService.getInstance().isUser(localuser)){
+            return false;
+        }
+        return true;
+        
+    }
     
 }

@@ -52,16 +52,20 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     @Override
     public void init() {
 //        setTheme("mytheme");
-    	buildMainLayout();
         
-         }      
-            private void buildMainLayout() {
-            window = new Window("Your SportDate Finder");
+    	window = new Window("Pleas Login in order to access the application");
+        setMainWindow(window);
+        window.addComponent(userManagementButton);
+        window.addWindow(new Startpopup(window,u));
+        
+         }
+    
+       public void buildMainLayout(Window window) {
                 setMainWindow(window);
               
                 //setMainWindow (new LoginWindow());//the authenticaion method
               
-                window.addWindow(new Startpopup(window,u));
+                
                 window.addComponent(newbuttonsForUserServices()); //reorganising buttons horizontally 1st
                 window.addComponent(createToolbar());
                 window.addComponent(newbuttonsForActivities()); //to link new activity to this buttons
