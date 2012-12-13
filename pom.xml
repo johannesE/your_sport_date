@@ -99,10 +99,11 @@
               <resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
             </baseResource>
           </webAppConfig>
-          <!--<connectors> <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+          <connectors> 
+              <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                            <port>9090</port> 
-                       </connector>
-          </connectors> -->
+                       </connector>        
+                  </connectors>
 	<systemProperties>
             <systemProperty>
               <name>logback.configurationFile</name>

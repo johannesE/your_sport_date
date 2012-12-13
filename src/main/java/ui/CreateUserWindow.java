@@ -27,6 +27,7 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
     public Form form;
     public User userbean;
     private Button commit;
+    Window window; 
 
     
     /** Window is created by using the constructor */
@@ -63,6 +64,7 @@ public class CreateUserWindow extends Window implements Button.ClickListener{
             form.commit();
             CurrentUser.getInstance().createUser(userbean);
             this.getParent().removeWindow(this);
+            //window.addWindow(new LoginWindow());
         }
     }
     

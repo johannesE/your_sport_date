@@ -11,6 +11,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import database.DatabaseService;
 import database.UserTable;
@@ -28,9 +29,9 @@ import ui.WeatherTable;
 @SuppressWarnings("serial")
 public class MyVaadinApplication extends Application implements Button.ClickListener{
 
-    public static Object getInstance() {
-        throw new UnsupportedOperationException("Not yet implemented");//auto generated from teh login
-    }
+   // public static Object getInstance() {
+   //     throw new UnsupportedOperationException("Not yet implemented");//Diff_1 auto generated from the login
+   // }
     private Window window;
     private Label weatherLabel;
     private WeatherTable weatherTable;
@@ -42,6 +43,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     Button debugButton;
     Button userListButton;
     Button deleteUserButton;
+    Button weatherButton; //creation of the weather Button to be related to weather condition
+    Button proposedActivity;// the activity must be related to this button
+    Button plannedActivity; // the planning must be related to this one
     private Component userlist = null;
     private Button userManagementButton = new Button("User Management", this);
 
@@ -50,33 +54,21 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 //        setTheme("mytheme");
     	buildMainLayout();
         
-    }
-public void authenticate( String login, String password) throws Exception
-    {
-        if (  "username".equals(login) && "querty".equals( password ) ) 
-        {
-            loadProtectedResources();
-            return;
-        }
-       
-       throw new Exception("Login failed!");
-
-    }
-
-    private void loadProtectedResources ()
-    {
-        setMainWindow(window);
-    }
-	
-    
-    private void buildMainLayout() {
-		window = new Window("Your SportDate Finder");
-		setMainWindow (new LoginWindow());//the authenticaion method
-                window.addComponent(createToolbar());
+         }      
+            private void buildMainLayout() {
+            window = new Window("Your SportDate Finder");
+                setMainWindow(window);
+              
+                //setMainWindow (new LoginWindow());//the authenticaion method
+              
+                window.addWindow(new Startpopup(window,u));
+           window.addComponent(createToolbar());
+        window.addComponent(newbuttonsForActivities());
+           
     
                 
                 //setMainWindow(window);
-                window.addWindow(new Startpopup(window,u));
+                //window.addWindow(new Startpopup(window,u));
 		//window.addComponent(createToolbar());
                 
 	}
@@ -84,11 +76,17 @@ public void authenticate( String login, String password) throws Exception
 	private Component createToolbar() {
 		HorizontalLayout lo = new HorizontalLayout();
                 weatherTable = new WeatherTable();
+                 window.addComponent(new Label("Weather Table"));
+               /*
+                * 
+                
                 lo.addComponent(weatherLabel = new Label("Weather: \n"
         		+"Proposed Activity: \n"
                         +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
+                */
                 lo.addComponent(weatherTable.createWeatherTable());
-                debugButton = new Button("DEBUG", this);
+                
+                 debugButton = new Button("DEBUG", this);
                 lo.addComponent(debugButton);
                 deleteUserButton = new Button("Delete my User", this);
                 userListButton = new Button("Get the User List", this);
@@ -97,7 +95,24 @@ public void authenticate( String login, String password) throws Exception
                 lo.addComponent(userManagementButton);
                 return lo;
 	}
-        private Component getUserList(){
+        
+                 
+        private Component newbuttonsForActivities(){     
+        
+           VerticalLayout ln = new VerticalLayout();
+            weatherButton = new Button ("Weather Situation");//to appear in the top
+           ln.addComponent(weatherButton); //to integrate buttons to UI
+                
+                proposedActivity = new Button ("Proposed Activity");
+                plannedActivity = new Button ("Planned Activity"); 
+                
+                ln.addComponent(proposedActivity); //to integrate buttons to UI
+                ln.addComponent(plannedActivity); //to integrate buttons to UI form
+                return ln;
+        }
+         
+              
+           private Component getUserList(){
             userList = new UserList();
             return userList.createUserList();
         }
@@ -111,6 +126,7 @@ public void authenticate( String login, String password) throws Exception
             createwindow.userbean.setUri(u.BASE_URI+createwindow.userbean.getUsername());
             u.createUserXML(createwindow.userbean);
             window.removeWindow(createwindow);
+                       
         }
         else if (e.getButton() == debugButton){
 //            DoodlePoll poll = new DoodlePoll();
@@ -175,6 +191,7 @@ public void authenticate( String login, String password) throws Exception
             
             
         }
+       // window.addWindow(new Startpopup(window,u));
     }
         
 }

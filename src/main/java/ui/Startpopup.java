@@ -40,10 +40,11 @@ public class Startpopup extends Window implements Button.ClickListener{
 
     public void buttonClick(ClickEvent e) {
         if (e.getButton()==loginUserButton){
+           window.addWindow(new LoginWindow());//to enable the authenticaion method
             
         }
         else if (e.getButton()==createUserButton){
-            window.removeWindow(this);
+            window.removeWindow(this);// this windwos to let the user use the services if on
             window.addWindow(new CreateUserWindow());
             
         }
