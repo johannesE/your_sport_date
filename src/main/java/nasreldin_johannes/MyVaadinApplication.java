@@ -62,8 +62,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 //setMainWindow (new LoginWindow());//the authenticaion method
               
                 window.addWindow(new Startpopup(window,u));
-           window.addComponent(createToolbar());
-        window.addComponent(newbuttonsForActivities());
+                window.addComponent(newbuttonsForUserServices()); //reorganising buttons horizontally 1st
+                window.addComponent(createToolbar());
+                window.addComponent(newbuttonsForActivities()); //to link new activity to this buttons
            
     
                 
@@ -75,6 +76,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 
 	private Component createToolbar() {
 		HorizontalLayout lo = new HorizontalLayout();
+                
                 weatherTable = new WeatherTable();
                  window.addComponent(new Label("Weather Table"));
                /*
@@ -85,21 +87,31 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                         +"Planned Activity: ", Label.CONTENT_PREFORMATTED));
                 */
                 lo.addComponent(weatherTable.createWeatherTable());
-                
+                return lo;
+        }
+        
+              
+    private Component newbuttonsForUserServices(){    
+        
+                  //VerticalLayout lr = new VerticalLayout();
+                   HorizontalLayout lr = new HorizontalLayout();
+                  
                  debugButton = new Button("DEBUG", this);
-                lo.addComponent(debugButton);
                 deleteUserButton = new Button("Delete my User", this);
                 userListButton = new Button("Get the User List", this);
-                lo.addComponent(deleteUserButton);
-                lo.addComponent(userListButton);
-                lo.addComponent(userManagementButton);
-                return lo;
-	}
-        
-                 
+               lr.addComponent(userListButton); //to arrange the buttons in the interface
+                lr.addComponent(userManagementButton);
+                lr.addComponent(deleteUserButton);
+                lr.addComponent(debugButton);
+                
+                  return lr;
+              }
+               
+    
+            
         private Component newbuttonsForActivities(){     
-        
-           VerticalLayout ln = new VerticalLayout();
+            HorizontalLayout ln = new HorizontalLayout();
+           
             weatherButton = new Button ("Weather Situation");//to appear in the top
            ln.addComponent(weatherButton); //to integrate buttons to UI
                 
@@ -109,9 +121,9 @@ public class MyVaadinApplication extends Application implements Button.ClickList
                 ln.addComponent(proposedActivity); //to integrate buttons to UI
                 ln.addComponent(plannedActivity); //to integrate buttons to UI form
                 return ln;
-        }
+}
          
-              
+
            private Component getUserList(){
             userList = new UserList();
             return userList.createUserList();
