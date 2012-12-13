@@ -6,6 +6,7 @@ package nasreldin_johannes;
 
 import JaxB_SportServer.User;
 import ServiceP_SportServer.UserService;
+import com.vaadin.ui.Label;
 import database.DatabaseService;
 import database.UserTable;
 
@@ -16,6 +17,9 @@ import database.UserTable;
 public class CurrentUser{
     private static CurrentUser instance;
     public String password = "";
+    public String username = "";
+    private UserService u;
+    User cybercoach = null;
 
     public String getPassword() {
         return password;
@@ -32,8 +36,7 @@ public class CurrentUser{
     public void setUsername(String username) {
         this.username = username;
     }
-    public String username = "";
-    private UserService u;
+    
     
     private CurrentUser(){
         u = UserService.getInstance();
@@ -54,7 +57,7 @@ public class CurrentUser{
         return instance;
     }
     
-    User cybercoach = null;
+
 
     public User getCybercoach() {
         return cybercoach;
@@ -69,6 +72,7 @@ public class CurrentUser{
         UserTable localuser = new UserTable(getCybercoach().getUsername(),
                 getCybercoach().getPassword());
         
+        //if the user is a new user
         if( ! DatabaseService.getInstance().isUser(localuser) && ! u.isUser(_user)){
             
             _user.setUri(u.BASE_URI+_user.getUsername());
@@ -76,6 +80,9 @@ public class CurrentUser{
             u.createUserXML(getCybercoach());
         
             DatabaseService.getInstance().createUser(localuser); //create local user
+            
+            MyVaadinApplication.getInstance().setLoggedin(true);
+            MyVaadinApplication.getInstance().setMainComponent(new Label("You logged in Successfully"));
             
         } else { 
             System.out.println("Username already taken, please try again");
@@ -92,6 +99,10 @@ public class CurrentUser{
         if( ! DatabaseService.getInstance().isUser(localuser)){
             return false;
         }
+        cybercoach.setUsername(username);
+        cybercoach.setPassword(password);
+        u.updateUserData(cybercoach);
+        
         return true;
         
     }

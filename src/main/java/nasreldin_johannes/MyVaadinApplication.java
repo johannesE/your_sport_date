@@ -201,7 +201,11 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             }
         }
         else if (e.getButton()== userManagementButton){
+            if(!loggedin){
             window.addWindow(new Startpopup(window, u));
+            } else { 
+                
+            }
         }
         
         else if(e.getButton() == deleteUserButton){

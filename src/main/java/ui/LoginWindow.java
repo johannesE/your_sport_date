@@ -30,7 +30,7 @@ public class LoginWindow extends Window implements Button.ClickListener{
         setName ("login");
         center();
         setModal(true);
-        setWidth("50%");
+        setWidth("30%");
         form = createForm();
         addComponent(form);
         commit = new Button("Commit", form, "commit");

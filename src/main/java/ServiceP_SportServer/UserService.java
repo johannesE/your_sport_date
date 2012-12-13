@@ -102,5 +102,11 @@ public class UserService {
         
 //       TODO:Logout of vaadin
     }
+    public User updateUserData(User _user){
+        WebResource r = client.resource(BASE_URI+"CyberCoachServer/resources/users/" + _user.getUsername());
+        _user = r.header("Authorization", "Basic " + new String(Base64.encode( _user.getUsername() +":"+ _user.getPassword() )))
+                .accept(MediaType.APPLICATION_XML).get(User.class);
+        return _user;
+    }
     
 }
