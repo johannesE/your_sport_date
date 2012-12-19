@@ -5,6 +5,9 @@
 package JaxB_SportServer;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -15,6 +18,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Subscription {
     int id;
     String uri;
+    Sport sport;
+    User user;
+
+    @XmlElementRef
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
+    public Sport getSport() {
+        return sport;
+    }
+
+    public void setSport(Sport sport) {
+        this.sport = sport;
+    }
     
     public Subscription(){
         

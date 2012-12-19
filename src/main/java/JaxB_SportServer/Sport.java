@@ -4,7 +4,10 @@
  */
 package JaxB_SportServer;
 
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,6 +20,17 @@ public class Sport {
     String name;
     String uri;
     String description;
+    Collection <Subscription> subscriptions;
+
+    @XmlElementWrapper(name="subscriptions")
+    @XmlElementRef
+    public Collection<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(Collection<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
     public Sport(){
         
     }

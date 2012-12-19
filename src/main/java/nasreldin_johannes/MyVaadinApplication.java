@@ -26,6 +26,10 @@ import ui.WeatherTable;
  */
 @SuppressWarnings("serial")
 public class MyVaadinApplication extends Application implements Button.ClickListener{
+    private Button myStatsButton;
+    private UserStats userStats;
+    private Button sportsButton;
+    private SportsView sportsView;
 
     public MyVaadinApplication(){ // I know that this should be private. Here this was not possible otherwise.
     }
@@ -35,7 +39,6 @@ public class MyVaadinApplication extends Application implements Button.ClickList
     private WeatherTable weatherTable;
     private UserList userList;
     private UserService u = UserService.getInstance();
-    private Button newUserButton = new Button("Create a new User", this);
     CreateUserWindow createwindow;
     Button debugButton;
     Button userListButton;
@@ -83,7 +86,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         
         VerticalLayout layout = new VerticalLayout();
         layout.setSizeFull();
-        verticalSplit.setSplitPosition(50, HorizontalSplitPanel.UNITS_PIXELS);
+        verticalSplit.setSplitPosition(150, HorizontalSplitPanel.UNITS_PIXELS);
         layout.addComponent(verticalSplit);
         
         verticalSplit.setFirstComponent(createToolbar());
@@ -97,14 +100,16 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 
 	private Component createToolbar() {
 		HorizontalLayout lo = new HorizontalLayout();
-                lo.addComponent(userManagementButton);
+                
                 if(loggedin){
+                    userManagementButton.setCaption("Logout");
                     lo.addComponent(newbuttonsForUserServices());
                 }
 //              
                 
-//                weatherTable = new WeatherTable();
-//                lo.addComponent(weatherTable.createWeatherTable());
+                weatherTable = new WeatherTable();
+                lo.addComponent(weatherTable.createWeatherTable());
+                lo.addComponent(userManagementButton);
                 return lo;
         }
         
@@ -113,13 +118,16 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         
                   //VerticalLayout lr = new VerticalLayout();
                 HorizontalLayout lr = new HorizontalLayout();
-                  
+                myStatsButton = new Button("My Stats", this);  
                 debugButton = new Button("DEBUG", this);
                 deleteUserButton = new Button("Delete my User", this);
                 userListButton = new Button("Get the User List", this);
+                sportsButton = new Button("Sports", this);
+                lr.addComponent(myStatsButton);
                 lr.addComponent(userListButton); //to arrange the buttons in the interface
                 lr.addComponent(deleteUserButton);
                 lr.addComponent(debugButton);
+                lr.addComponent(sportsButton);
                 return lr;
               }
                
@@ -145,7 +153,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
 
 
     public void buttonClick(ClickEvent e) {
-        if (e.getButton()== newUserButton) {
+        if (e.getButton()== null) {
         }
         else if (e.getButton() == debugButton){
 //            DoodlePoll poll = new DoodlePoll();
@@ -203,19 +211,29 @@ public class MyVaadinApplication extends Application implements Button.ClickList
         else if (e.getButton()== userManagementButton){
             if(!loggedin){
             window.addWindow(new Startpopup(window, u));
-            } else { 
-                
+            } else { // logout
+                loggedin = false;
+                this.init();
+                window.addWindow(new Startpopup(window, u));
             }
         }
         
         else if(e.getButton() == deleteUserButton){
             
-            
-            
-            
-            
         }
-       // window.addWindow(new Startpopup(window,u));
+        else if(e.getButton() == myStatsButton){
+           if(userStats == null){
+               userStats = new UserStats();
+           } 
+           setMainComponent(userStats.getComponent());
+           
+        } else if (e.getButton()== sportsButton){
+            if (sportsView ==null){
+                sportsView = new SportsView();
+            }
+            setMainComponent(sportsView.getComponent());
+        }
+       
     }
         
 }

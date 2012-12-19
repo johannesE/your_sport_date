@@ -99,11 +99,19 @@ public class CurrentUser{
         if( ! DatabaseService.getInstance().isUser(localuser)){
             return false;
         }
+        
+        
+        updateCybercoach(username, password);
+        return true;
+        
+    }
+
+    public void updateCybercoach(String username, String password) {
         cybercoach.setUsername(username);
         cybercoach.setPassword(password);
-        u.updateUserData(cybercoach);
+        User upUser = u.updateUserData(cybercoach);
         
-        return true;
+        cybercoach = upUser;
         
     }
     

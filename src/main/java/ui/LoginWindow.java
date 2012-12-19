@@ -33,7 +33,7 @@ public class LoginWindow extends Window implements Button.ClickListener{
         setWidth("30%");
         form = createForm();
         addComponent(form);
-        commit = new Button("Commit", form, "commit");
+        commit = new Button("Login", form, "commit");
         commit.addListener(this);
         addComponent(commit);
     }
@@ -69,7 +69,7 @@ public class LoginWindow extends Window implements Button.ClickListener{
             
             if(currentUser.loginUser(form.getField("username").toString(),
                     form.getField("password").toString())){
-                
+                CurrentUser.getInstance().updateCybercoach(form.getField("username").toString(), form.getField("password").toString());
                 this.getParent().removeWindow(this);
                 MyVaadinApplication.getInstance().setLoggedin(true);
                 MyVaadinApplication.getInstance().setMainComponent(new Label("You logged in Successfully"));
