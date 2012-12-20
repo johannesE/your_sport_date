@@ -218,6 +218,7 @@ public class MyVaadinApplication extends Application implements Button.ClickList
             else {
                 userlist = getUserList();
                 userlist.requestRepaint();
+                setMainComponent(userlist);
             }
         }
         else if (e.getButton()== userManagementButton){
