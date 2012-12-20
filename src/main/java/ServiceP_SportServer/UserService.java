@@ -16,6 +16,8 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.core.util.Base64;
 import javax.ws.rs.core.MediaType;
+import nasreldin_johannes.CurrentUser;
+import org.apache.http.util.EntityUtils;
 
 
 /**
@@ -151,6 +153,34 @@ public class UserService {
         _user = r.accept(MediaType.APPLICATION_XML).get(User.class);
         
         return _user;
+    }
+    public void setSubscription(Sport _sport, User _user){
+        System.out.println("Posting Subscription.. " +_user.getUsername() + "/"+ _sport.getName() );
+        WebResource r = client.resource(BASE_URI + "/CyberCoachServer/resources/users/"
+                +_user.getUsername() + "/"+ _sport.getName());
+        _user.setPassword(CurrentUser.getInstance().password);
+        System.out.println(_user.getUsername() + " "+ _user.getPassword());
+        
+        Subscription _sub = new Subscription();
+//        _sub.setUri("/CyberCoachServer/resources/users/"
+//                +_user.getUsername() + "/"+ _sport.getName());
+        _sub.setUser(_user);
+        _sub.setSport(_sport);
+        
+        ClientResponse resp= r.header("Authorization", "Basic " + new String(Base64.encode( _user.getUsername() +":"+ _user.getPassword() )))
+                .type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML)
+                .put(ClientResponse.class, _sub);
+        
+        System.out.println(resp.getHeaders() + " " + resp.toString() + " " + resp.getStatus());
+        
+        if("200".equals(resp.getClientResponseStatus().toString())){
+            System.out.println("There has been an error, "+
+                    "your subscription could not have been created");
+        } else {
+            System.out.println("subscription created :-)");
+        }
+        
     }
     
     
