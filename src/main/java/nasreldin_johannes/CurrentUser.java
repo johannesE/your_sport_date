@@ -114,5 +114,16 @@ public class CurrentUser{
         cybercoach = upUser;
         
     }
+
+    void removeMe() {
+       u.deleteUser(cybercoach);
+       
+       UserTable _user = new UserTable(getUsername(), getPassword());
+       if(!DatabaseService.getInstance().isUser(_user)){
+           System.out.println("Something weird happened with your user"); return;
+       }
+       _user = DatabaseService.getInstance().getUser(_user); //to update the id in the table
+       DatabaseService.getInstance().deleteUser(_user);
+    }
     
 }

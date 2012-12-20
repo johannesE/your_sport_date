@@ -20,6 +20,16 @@ public class Subscription {
     String uri;
     Sport sport;
     User user;
+    Partnership partnership;
+    
+    @XmlElementRef
+    public Partnership getPartnership() {
+        return partnership;
+    }
+
+    public void setPartnership(Partnership partnership) {
+        this.partnership = partnership;
+    }
 
     @XmlElementRef
     public User getUser() {

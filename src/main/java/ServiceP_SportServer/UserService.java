@@ -5,6 +5,7 @@
 package ServiceP_SportServer;
 
 import JaxB_SportServer.ListXML;
+import JaxB_SportServer.Partnership;
 import JaxB_SportServer.Sport;
 import JaxB_SportServer.Subscription;
 import JaxB_SportServer.User;
@@ -133,6 +134,23 @@ public class UserService {
         _sub = r.accept(MediaType.APPLICATION_XML).get(Subscription.class);
         
         return _sub;
+    }
+    
+    public Partnership getPartnershipDetails(Partnership _part){
+        System.out.println("Accessing Partnership.." + _part.getUri());
+        WebResource r = client.resource(BASE_URI + _part.getUri());
+        _part = r.accept(MediaType.APPLICATION_XML).get(Partnership.class);
+        System.out.println("Partnership"+ _part.getId() +" accessed");
+        System.out.println("Partnership"+ _part.getUser1() +" accessed");
+        return _part;
+    }
+    
+    public User getUserDetails(User _user){
+        System.out.println("Accessing User.." + _user.getUri());
+        WebResource r = client.resource(BASE_URI + _user.getUri());
+        _user = r.accept(MediaType.APPLICATION_XML).get(User.class);
+        
+        return _user;
     }
     
     

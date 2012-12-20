@@ -4,13 +4,13 @@
  */
 package nasreldin_johannes;
 
+import JaxB_SportServer.Partnership;
 import JaxB_SportServer.Sport;
 import JaxB_SportServer.Subscription;
+import JaxB_SportServer.User;
 import ServiceP_SportServer.UserService;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.terminal.Paintable;
-import com.vaadin.terminal.Paintable.RepaintRequestEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -44,7 +44,7 @@ public class SportsView{
     }
     
     private Table sportTable(){
-        sportsTable = new Table("Available Sports are: ");
+        sportsTable = new Table("Available Sports are:   ");
         sportsTable.addContainerProperty("Name", String.class, null);
         sportsTable.setSelectable(true);
         sportsTable.setImmediate(true);
@@ -83,7 +83,20 @@ public class SportsView{
 //            System.out.println(__sub.getId());
             if(__sub != null){// because of some errors on the server
                 if(__sub.getUser() != null){
+                    
                     _table.addItem(new Object[]{__sub.getUser().getUsername(), __sub.getUri()}, new Integer(i+1));
+                
+                } else if(__sub.getPartnership() != null){ //when the subscription happened by a partnership
+                    
+                    Partnership _partnership = u.getPartnershipDetails(__sub.getPartnership());
+//                    System.out.println(__sub.getPartnership().toString());
+                    if(_partnership.isUserconfirmed1() && _partnership.isUserconfirmed2()){
+                        User _user1 = u.getUserDetails(_partnership.getUser1());
+                        User _user2 = u.getUserDetails(_partnership.getUser2());
+                    
+                        _table.addItem(new Object[]{new String("Partners: " + _user1.getUsername() + " & " 
+                            + _user2.getUsername()), __sub.getUri() }, new Integer (i+1));
+                    }          
                 }
             }
         }

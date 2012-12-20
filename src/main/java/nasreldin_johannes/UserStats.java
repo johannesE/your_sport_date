@@ -6,6 +6,7 @@ package nasreldin_johannes;
 
 import JaxB_SportServer.Subscription;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
@@ -33,16 +34,19 @@ public class UserStats {
         subscriptions.addContainerProperty("Time added", Date.class, null);
         if (user.getCybercoach().getSubscriptions() != null){
             subscriptionsentries = user.getCybercoach().getSubscriptions().toArray( new Subscription[0]);
-        }
         
         //adding the entries to the table
-        for (int i =0; i< subscriptionsentries.length; i++){
-            subscriptions.addItem(new Object[]{subscriptionsentries[i].getSport()}, new Integer(i+1));
+            for (int i =0; i< subscriptionsentries.length; i++){
+                subscriptions.addItem(new Object[]{subscriptionsentries[i].getSport()}, new Integer(i+1));
+            }
         }
+        HorizontalLayout hl = new HorizontalLayout();
+        
+        hl.addComponent(new Label("You have the following Subscriptions: "));
+        hl.addComponent(subscriptions);
         
         
-        vl.addComponent(new Label("You have the following Subscriptions: "));
-        vl.addComponent(subscriptions);
+        vl.addComponent(hl);
         return vl;
     }
     

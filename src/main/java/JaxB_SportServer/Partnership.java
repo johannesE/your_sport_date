@@ -5,7 +5,7 @@
 package JaxB_SportServer;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,12 +16,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Partnership {
     int id;
     String uri;
-    boolean publicvisible;
+    int publicvisible;
     User user1;
     User user2;
+    boolean userconfirmed1;
+    boolean userconfirmed2;
     public Partnership(){
         
     }
+    @XmlAttribute
+    public boolean isUserconfirmed1() {
+        return userconfirmed1;
+    }
+
+    public void setUserconfirmed1(boolean userconfirmed1) {
+        this.userconfirmed1 = userconfirmed1;
+    }
+    @XmlAttribute
+    public boolean isUserconfirmed2() {
+        return userconfirmed2;
+    }
+
+    public void setUserconfirmed2(boolean userconfirmed2) {
+        this.userconfirmed2 = userconfirmed2;
+    }
+    
     @XmlAttribute
     public int getId() {
         return id;
@@ -39,15 +58,16 @@ public class Partnership {
         this.uri = uri;
     }
     
-    public boolean isPublicvisible() {
+    public int isPublicvisible() {
         return publicvisible;
     }
 
-    public void setPublicvisible(boolean publicvisible) {
+    public void setPublicvisible(int publicvisible) {
         this.publicvisible = publicvisible;
     }
     //Eventuell falsch..
-    @XmlElementRef
+    
+    @XmlElement(name="user1")
     public User getUser1() {
         return user1;
     }
@@ -56,7 +76,7 @@ public class Partnership {
         this.user1 = user1;
     }
     //Eventuell falsch..
-    @XmlElementRef
+    @XmlElement(name="user2")
     public User getUser2() {
         return user2;
     }

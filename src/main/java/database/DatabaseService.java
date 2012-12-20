@@ -78,6 +78,15 @@ public class DatabaseService {
        }
        
    }
+   public void deleteUser (UserTable _user){
+       EM.getTransaction().begin();
+       
+       EM.remove(_user);
+       
+       EM.flush();
+       EM.getTransaction().commit(); //I invite anyone who reads this to a beer. Write me an email to johannes@keskispass.ch
+       
+   }
    
    public UserTable getUser(UserTable _user){
        UserTable result = null;
